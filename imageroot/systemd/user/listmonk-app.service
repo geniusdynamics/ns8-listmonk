@@ -21,7 +21,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/listmonk-app.pid \
     --cidfile %t/listmonk-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/listmonk.pod-id --replace -d --name  listmonk-app \
-    --volume %S/bin/config.tml:/config.yml:Z \
+    --volume %S/bin/config.toml:/config.toml:Z \
     --env-file=%S/state/listmonk-db.env \
     --env-file=%S/state/listmonk.env \
     ${LISTMONK_IMAGE} "./listmonk --install --config config.toml && ./listmonk --config config.toml"
