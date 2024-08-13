@@ -1,0 +1,15 @@
+[app]
+# Interface and port where the app will run its webserver.
+address = "${APP_HOST}"
+
+# Database.
+[db]
+host = "${DATABASE_HOST}"
+port = 5432
+user = "${DATABASE_USER}"
+password = "${DATABASE_PASSWORD}"
+database = "${DATABASE_NAME}"
+ssl_mode = "disable"
+max_open = 25
+max_idle = 25
+max_lifetime = "300s"
