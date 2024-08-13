@@ -24,7 +24,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/listmonk-app.pid \
     --volume %S/bin/config.tml:/config.yml:Z \
     --env-file=%S/state/listmonk-db.env \
     --env-file=%S/state/listmonk.env \
-    ${LISTMONK_IMAGE}
+    ${LISTMONK_IMAGE} "./listmonk --install --config config.toml && ./listmonk --config config.toml"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/listmonk-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP listmonk-app
 SyslogIdentifier=%u
