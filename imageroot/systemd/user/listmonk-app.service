@@ -12,11 +12,14 @@ After=listmonk.service postgresql-app.service
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
 EnvironmentFile=-%S/state/smarthost.env
+EnvironmentFile=%S/state/listmonk-db.env
+EnvironmentFile=%S/state/listmonk.env
 WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p config
 ExecStartPre=/bin/rm -f %t/listmonk-app.pid %t/listmonk-app.ctr-id
+ExecStartPre=/bin/sh -c "envsubst < %S/bin/config.toml > %S/bin/config.toml.tmp && mv %S/bin/config.toml.tmp %S/bin/config.toml"
 ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/listmonk-app.pid \
     --cidfile %t/listmonk-app.ctr-id --cgroups=no-conmon \
