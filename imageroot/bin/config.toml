@@ -1,7 +1,8 @@
 [app]
 # Interface and port where the app will run its webserver.
 address = "0.0.0.0:9000"
-
+admin_username = "${ADMIN_USERNAME}"
+admin_password = "${ADMIN_PASSWORD}"
 # Database.
 [db]
 host = "${DATABASE_HOST}"
