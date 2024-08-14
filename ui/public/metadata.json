@@ -1,19 +1,19 @@
 {
   "name": "listmonk",
   "description": {
-    "en": "My listmonk module"
+    "en": "Self-hosted newsletter and mailing list manager"
   },
   "categories": [],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Genius Dynamics",
+      "email": "support@genius.ke"
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.listmonk.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-listmonk"
+    "documentation_url": "https://listmonk.app/docs",
+    "bug_url": "https://github.com/geniusdynamics/dev",
+    "code_url": "https://github.com/geniusdynamics/ns8-listmonk"
   },
-  "source": "ghcr.io/nethserver/listmonk"
+  "source": "ghcr.io/geniusdynamics/listmonk"
 }
