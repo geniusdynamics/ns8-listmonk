@@ -61,6 +61,29 @@
                 $t("settings.enabled")
               }}</template>
             </cv-toggle>
+
+            <cv-text-input
+                :label="$t('Admin Username')"
+                placeholder="Admin Username"
+                v-model="ADMIN_USERNAME"
+                class="mg-bottom"
+                :invalid-message="$t(error.ADMIN_USERNAME)"
+                :disabled="loading.getConfiguration || loading.configureModule"
+                ref="ADMIN_USERNAME"
+            >
+            </cv-text-input>
+
+            <cv-text-input
+                :label="$t('Admin Password')"
+                placeholder="***********"
+                v-model="ADMIN_PASSWORD"
+                class="mg-bottom"
+                :invalid-message="$t(error.ADMIN_PASSWORD)"
+                :disabled="loading.getConfiguration || loading.configureModule"
+                ref="ADMIN_PASSWORD"
+                type="password"
+            >
+            </cv-text-input>
               <!-- advanced options -->
             <cv-accordion ref="accordion" class="maxwidth mg-bottom">
               <cv-accordion-item :open="toggleAccordion[0]">
@@ -125,6 +148,8 @@ export default {
       host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: true,
+      ADMIN_USERNAME: "",
+      ADMIN_PASSWORD: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -135,6 +160,8 @@ export default {
         host: "",
         lets_encrypt: "",
         http2https: "",
+        ADMIN_USERNAME: "",
+        ADMIN_PASSWORD: "",
       },
     };
   },
@@ -271,6 +298,8 @@ export default {
             host: this.host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            ADMIN_USERNAME: this.ADMIN_USERNAME,
+            ADMIN_PASSWORD: this.ADMIN_PASSWORD,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
