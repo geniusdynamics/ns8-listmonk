@@ -16,6 +16,12 @@ import agent
 
 # Prepare return variable
 config = {}
+if os.path.exists("listmonk.env"):
+    config["ADMIN_USERNAME"] = agent.read_envfile("listmonk.env")["ADMIN_USERNAME"]
+    config["ADMIN_PASSWORD"] = agent.read_envfile("listmonk.env")["ADMIN_PASSWORD"]
+else:
+    config["ADMIN_USERNAME"] = ""
+    config["ADMIN_PASSWORD"] = ""
 
 # Read current configuration from the environment file
 config["host"] = os.getenv("TRAEFIK_HOST","")
