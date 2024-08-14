@@ -15,9 +15,12 @@ data = json.load(sys.stdin)
 
 #This is specific to you module, so you need to change it accordingly.
 host = data.get("host")
-
+ADMIN_USERNAME = data.get("ADMIN_USERNAME", "listmonk")
+ADMIN_PASSWORD = data.get("ADMIN_PASSWORD", "listmonk")
 config = {
     "APP_HOST": "https://"+host,
+    "ADMIN_USERNAME": ADMIN_USERNAME,
+    "ADMIN_PASSWORD": ADMIN_PASSWORD,
 }
 agent.write_envfile("listmonk.env", config)
 
