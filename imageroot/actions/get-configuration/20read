@@ -17,14 +17,15 @@ import agent
 # Prepare return variable
 config = {}
 if os.path.exists("listmonk.env"):
-    config["ADMIN_USERNAME"] = agent.read_envfile("listmonk.env")["ADMIN_USERNAME"]
-    config["ADMIN_PASSWORD"] = agent.read_envfile("listmonk.env")["ADMIN_PASSWORD"]
+    data = agent.read_envfile("listmonk.env")
+    config["ADMIN_USERNAME"] = data.get("ADMIN_USERNAME")
+    config["ADMIN_PASSWORD"] = data.get("ADMIN_PASSWORD")
 else:
     config["ADMIN_USERNAME"] = ""
     config["ADMIN_PASSWORD"] = ""
 
 # Read current configuration from the environment file
-config["host"] = os.getenv("TRAEFIK_HOST","")
+config["host"] = os.getenv("TRAEFIK_HOST", "")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 

@@ -9,6 +9,7 @@ import json
 import sys
 import agent
 import os
+
 # Try to parse the stdin as JSON.
 # If parsing fails, output everything to stderr
 data = json.load(sys.stdin)
@@ -16,22 +17,24 @@ data = json.load(sys.stdin)
 
 # Generate Password
 
+
 def generate_random_password(length):
     # Generate random bytes and convert them to a hexadecimal string
     random_bytes = os.urandom(length)
     password = random_bytes.hex()
     return password[:length]
 
-#This is specific to you module, so you need to change it accordingly.
+
+# This is specific to you module, so you need to change it accordingly.
 
 # configure postgres db variables
-POSTGRES_USER="postgres"
-POSTGRES_PASSWORD=generate_random_password(16)
-POSTGRES_DB="listmonk"
+POSTGRES_USER = "postgres"
+POSTGRES_PASSWORD = generate_random_password(16)
+POSTGRES_DB = "listmonk"
 postgres_config = {
     "POSTGRES_USER": POSTGRES_USER,
     "POSTGRES_PASSWORD": POSTGRES_PASSWORD,
-    "POSTGRES_DB": POSTGRES_DB
+    "POSTGRES_DB": POSTGRES_DB,
 }
 agent.write_envfile("database.env", postgres_config)
 
@@ -39,10 +42,9 @@ listmonk_config = {
     "DATABASE_HOST": "postgresql-app",
     "DATABASE_USER": POSTGRES_USER,
     "DATABASE_PASSWORD": POSTGRES_PASSWORD,
-    "DATABASE_NAME": POSTGRES_DB
+    "DATABASE_NAME": POSTGRES_DB,
 }
 agent.write_envfile("listmonk-db.env", listmonk_config)
 
 
-
-#agent.dump_env()
+# agent.dump_env()
