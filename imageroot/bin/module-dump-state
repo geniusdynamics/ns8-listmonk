@@ -8,4 +8,4 @@
 set -e
 
 echo "Dumping listmonk postgres database"
-podman exec postgresql-app pg_dump -U postgres --format=c  listmonk > listmonk.pg_dump
+podman exec postgresql-app pg_dump -U postgres --format=c listmonk >listmonk.pg_dump
