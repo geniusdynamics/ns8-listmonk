@@ -19,16 +19,14 @@ Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p config
 ExecStartPre=/bin/rm -f %t/listmonk-app.pid %t/listmonk-app.ctr-id
-ExecStartPre=/bin/sh -c "envsubst < %S/bin/config.toml > %S/bin/config.toml.tmp && mv %S/bin/config.toml.tmp %S/bin/config.toml"
 ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/listmonk-app.pid \
     --cidfile %t/listmonk-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/listmonk.pod-id --replace -d --name  listmonk-app \
-    --volume %S/bin/config.toml:/config.toml:Z \
     --volume uploads:/listmonk/uploads/:Z \
     --env-file=%S/state/listmonk-db.env \
     --env-file=%S/state/listmonk.env \
-    ${LISTMONK_IMAGE} sh -c "yes | ./listmonk --install --config /config.toml && ./listmonk --config /config.toml"
+    ${LISTMONK_IMAGE} sh -c "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/listmonk-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP listmonk-app
 SyslogIdentifier=%u
