@@ -14,7 +14,7 @@ images=()
 repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 # Configure the image name
 reponame="listmonk"
-listmonk_version="v5.1.0"
+listmonk_version="v6.0.0"
 # Create a new empty container image
 container=$(buildah from scratch)
 
